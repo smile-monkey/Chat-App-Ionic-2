@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar color="tabbarcolor">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{contactName}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content #content padding>
+
+  <div id="groupsms">
+
+  </div>
+
+</ion-content>
+
+<ion-footer class="chatPageFooter">
+  <ion-toolbar color="tabbarcolor">
+
+    <ion-item>
+      <ion-label style="margin:0px;"></ion-label>
+      <div item-content style="width:100%;">
+        <ion-input type="text" [(ngModel)]="msg"></ion-input>
+      </div>
+    </ion-item>
+
+    <ion-buttons right>
+      <button style="min-width:45px;" (click)="SendMessage()">
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

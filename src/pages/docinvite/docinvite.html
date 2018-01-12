@@ -1,0 +1,11 @@
+<ion-content>
+	<ion-item>
+		<ion-label floating>Enter Emails</ion-label>
+		<ion-textarea #ionTxtArea [(ngModel)]="content"></ion-textarea>
+	</ion-item>
+	<div padding>
+    <button ion-button color="primary" (click)="Sendinvitation()" block >Send Invitation</button>
+	</div>
+	<p class="succ">{{response_succ}}</p>
+	<p class="error">{{response}}</p>
+</ion-content>

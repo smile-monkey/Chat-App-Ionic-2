@@ -1,0 +1,28 @@
+<ion-content >
+	<p class="succ">{{response_succ}}</p>
+	<p class="error">{{response}}</p>
+	<ion-item>
+		<ion-label floating>First Name</ion-label>
+		<ion-input type="text" [(ngModel)]="first_name"></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label floating>Last Name</ion-label>
+		<ion-input type="text" [(ngModel)]="last_name"></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label floating>Mobile</ion-label>
+		<ion-input type="text" [(ngModel)]="mobile"></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label floating>Email</ion-label>
+		<ion-input type="text" [(ngModel)]="email"></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label floating>Password</ion-label>
+		<ion-input type="password" type="password" [(ngModel)]="password"></ion-input>
+	</ion-item>
+	
+	<div padding>
+		<button ion-button color="primary" block (click)="sendinvitbymail()">Send Invitation</button>
+	</div>
+</ion-content>

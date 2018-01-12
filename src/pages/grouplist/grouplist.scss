@@ -1,0 +1,28 @@
+page-grouplist {
+.item-md ion-thumbnail
+	{
+		min-height: 0px;
+		min-width: 0px;		
+	}
+	 
+	.item-md .ion-md-person
+	{
+		color:#488aff;
+		font-size:3.6rem;
+	}
+	
+	.ion-md-chatbubbles
+	{
+		color:#488aff;
+		font-size:2rem;
+	}
+	.item .item-inner
+	{
+		border:none !important;
+	}
+	
+	.item
+	{
+		border:1px solid #dedede;
+	}
+}

@@ -1,0 +1,8 @@
+{
+  "name": "ec-app",
+  "app_id": "d1f215e5",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

@@ -1,0 +1,23 @@
+ <ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Staff</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+	<p>{{response}}</p>
+	<ion-list>
+		 <ion-item *ngFor="let element of finalresult; let i = index" (click)="chatview($event, element)">
+			<ion-thumbnail item-start>
+			 <button ion-button clear item-end ><ion-icon ios="ios-contact" md="md-person" color="tabbarcolor"></ion-icon></button>
+			</ion-thumbnail>
+			<h2 ng-if="element.Name">{{element.Name}}</h2>
+			<h2 *ngIf="(element.Name == null)">User</h2>
+			<button ion-button clear item-end ><ion-icon ios="ios-chatbubbles" md="md-chatbubbles"></ion-icon></button>
+		 </ion-item> 
+		
+</ion-list>
+</ion-content>
+ 
