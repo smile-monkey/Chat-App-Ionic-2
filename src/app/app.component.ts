@@ -49,7 +49,24 @@ export class MyApp {
     this.event.subscribe('stopApp', () => {
       this.stopApp();
     });
-    this.initializeApp();
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+
+      // OneSignal Code start:
+      // Enable to debug issues:
+      // window["plugins"].OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+
+      var notificationOpenedCallback = function (jsonData) {
+        console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+      };
+
+      window["plugins"].OneSignal
+        .startInit("426e2e39-5ea9-4387-996a-d5e567f83699", "243600679786")
+        .handleNotificationOpened(notificationOpenedCallback)
+        .endInit();
+      this.initializeApp();
+    });
   }
 
   initializeApp() {

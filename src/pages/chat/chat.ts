@@ -128,6 +128,9 @@ export class ChatPage {
         // this.dbProvider.saveMessage(this.item.Type, this.item.Id, message);
         window['jQuery'].connection.chatHub.invoke('SendMessage', message);
         // this.proccessMessage(message);
+        if (this.item.PlayerId){
+          this.createPushNotification(this.msg);
+        }
         this.msg = "";
         // setTimeout(() => {
         // this.content.scrollToBottom();
@@ -150,7 +153,6 @@ export class ChatPage {
         // 	});
         // }
       });
-      this.createPushNotification();
     });
   }
 
@@ -199,6 +201,33 @@ export class ChatPage {
     popover.present({
       ev: myEvent
     });
+  }
+  createPushNotification(msg) {
+    var headers: any = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    let data = JSON.stringify(
+      {
+        "app_id": "426e2e39-5ea9-4387-996a-d5e567f83699",
+        "included_segments": this.item.PlayerId,
+        "data": { "Push Notification": msg },
+        "contents": { "en": "English Message" }
+      }
+    );
+    headers.append('Authorization', 'OGMwMzI1NWItZDI2Ni00YzQ0LWFjZTMtNTQxMGViYjFjZGRm');
+    this.http.post('https://onesignal.com/api/v1/notifications', data, headers)
+      .map(res => res.json())
+      .subscribe(res => {
+        if (res.status == 'true') {
+          console.log("Sent Notfication");
+        }
+        else {
+          console.log("Send Notfication Error");
+        }
+
+      }, (err) => {
+        console.log("Error");
+      });
   }
 
   ionViewWillLeave() {
