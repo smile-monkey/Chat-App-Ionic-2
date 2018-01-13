@@ -46,7 +46,6 @@ export class HomePage {
 						.then(() => {
 							this.storage.set('username', res.username)
 								.then(() => {
-									this.getOneSignalPlayerId();
 									this.event.publish('startApp', res.user_id);
 								});
 						});
@@ -60,43 +59,5 @@ export class HomePage {
 				loading.dismiss();
 				this.response = 'Something is wrong';
 			});
-	}
-	getOneSignalPlayerId() {        // get Onesignal playerid and add/update it to users node.
-		window["plugins"].OneSignal.getPermissionSubscriptionState(function(status) {
-			this.PlayerId = status.subscriptionStatus.userId;
-		});
-		var headers: any = new Headers();
-		headers.append('Content-Type', 'application/json');
-		this.http.get('https://chat.emailcipher.com:8081/api/device/info?userId=' + this.storage.get('user_id'), headers)
-		.map(res => res.json())
-		.subscribe(res => {
-			console.log(res);
-
-			if (!res.PlayerId) {
-				let data = JSON.stringify(
-					{
-						"UserId": this.storage.get('user_id'),
-						"PlayerId": this.PlayerId
-					}
-				);
-				this.http.post('https://chat.emailcipher.com:8081/api/device/register', data, headers)
-					.map(res => res.json())
-					.subscribe(res => {
-						if (res.Success == 'true') {
-							console.log("PlayerID registered");
-						}
-						else {
-							console.log("Error");
-						}
-
-					}, (err) => {
-						console.log("Error");
-
-					});
-			}
-		}, (err) => {
-			console.log("Error");
-
-		});
 	}
 }

@@ -2,7 +2,7 @@ import { Component, ViewChild} from '@angular/core';
 import { NavController, NavParams, PopoverController, Events  } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
-import $ from 'jquery';
+// import $ from 'jquery';
 import 'expose-loader?jQuery!jquery';
 import 'signalr';
 import { Http } from '@angular/http';

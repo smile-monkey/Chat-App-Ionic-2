@@ -200,45 +200,6 @@ export class ChatPage {
       ev: myEvent
     });
   }
-  createPushNotification() {
-    var headers: any = new Headers();
-    headers.append('Content-Type', 'application/json');
-    this.http.get('https://chat.emailcipher.com:8081/api/device/info?userId=' + this.item.id, headers)
-      .map(res => res.json())
-      .subscribe(res => {
-        console.log(res);
-
-        if (res.PlayerId) {
-          let data = JSON.stringify(
-            {
-              "app_id": "426e2e39-5ea9-4387-996a-d5e567f83699",
-              "included_segments": res.PlayerId,
-              "data": { "Push Notification": "EmailChiper notification" },
-              "contents": { "en": "English Message" }
-            }
-          );
-          headers.append('Authorization', 'OGMwMzI1NWItZDI2Ni00YzQ0LWFjZTMtNTQxMGViYjFjZGRm');
-          this.http.post('https://onesignal.com/api/v1/notifications', data, headers)
-            .map(res => res.json())
-            .subscribe(res => {
-              if (res.status == 'true') {
-                console.log("Sent Notfication");
-              }
-              else {
-                console.log("Send Notfication Error");
-              }
-
-            }, (err) => {
-              console.log("Error");
-
-            });
-        }
-      }, (err) => {
-        console.log("Error");
-
-      });
-
-  }
 
   ionViewWillLeave() {
     this.event.unsubscribe('messageReceived:' + this.item.Type + ':' + this.item.Id, function (message) {
