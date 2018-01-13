@@ -60,14 +60,11 @@ export class MyApp {
       var notificationOpenedCallback = function (jsonData) {
         console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
       };
-      if (window['plugins']) {
-        if(this.platform.is('android') || this.platform.is('ios')){
-          window["plugins"].OneSignal
-            .startInit("426e2e39-5ea9-4387-996a-d5e567f83699", "243600679786")
-            .handleNotificationOpened(notificationOpenedCallback)
-            .endInit();
-        }
-      }
+
+      window["plugins"].OneSignal
+        .startInit("426e2e39-5ea9-4387-996a-d5e567f83699", "243600679786")
+        .handleNotificationOpened(notificationOpenedCallback)
+        .endInit();
       this.initializeApp();
       });
   }

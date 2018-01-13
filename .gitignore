@@ -6,6 +6,5 @@ node_modules/
 .sourcemaps/
 www/
 plugins/
-resources/
 platforms/
 .idea/

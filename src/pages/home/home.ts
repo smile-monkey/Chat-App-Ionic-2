@@ -46,11 +46,7 @@ export class HomePage {
 						.then(() => {
 							this.storage.set('username', res.username)
 								.then(() => {
-									if (window['plugins']) {
-										if(this.platform.is('android') || this.platform.is('ios')){
-											this.getOneSignalPlayerId();
-										}
-									}
+									this.getOneSignalPlayerId();
 									this.event.publish('startApp', res.user_id);
 								});
 						});
