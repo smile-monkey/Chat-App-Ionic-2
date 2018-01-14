@@ -81,6 +81,7 @@ import { OneSignal } from '@ionic-native/onesignal';
     SplashScreen,
     SQLite,
     LocalNotifications,
+    OneSignal,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DbProvider
   ]

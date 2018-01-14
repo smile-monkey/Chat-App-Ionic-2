@@ -5,13 +5,13 @@ import { Storage } from '@ionic/storage';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import 'expose-loader?jQuery!jquery';
 import 'signalr';
-import { Http } from '@angular/http';
+// import { Http } from '@angular/http';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { InvitePage } from '../pages/invite/invite';
 import { LogoutPage } from '../pages/logout/logout';
 import { DbProvider } from '../providers/db/db';
-import { LocalNotifications } from '@ionic-native/local-notifications';
+// import { LocalNotifications } from '@ionic-native/local-notifications';
 
 
 
@@ -32,7 +32,7 @@ export class MyApp {
     private event: Events,
     private dbProvider: DbProvider,
     public storage: Storage,
-    private localNotifications: LocalNotifications,
+    // private localNotifications: LocalNotifications,
     public splashScreen: SplashScreen) {
 
     // used for an example of ngFor and navigation

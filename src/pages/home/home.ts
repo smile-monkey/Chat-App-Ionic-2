@@ -1,10 +1,10 @@
-import { DbProvider } from './../../providers/db/db';
+// import { DbProvider } from './../../providers/db/db';
 import { Component } from '@angular/core';
 import { NavController, MenuController, Events, Platform } from 'ionic-angular';
 import { Http, Headers } from '@angular/http';
 import { Storage } from "@ionic/storage";
 import 'rxjs/add/operator/map';
-import { ListPage } from '../list/list';
+// import { ListPage } from '../list/list';
 import { LoadingController } from 'ionic-angular';
 @Component({
 	selector: 'page-home',
@@ -21,8 +21,7 @@ export class HomePage {
 		public loadingCtrl: LoadingController,
 		public menuCtrl: MenuController,
 		private event: Events,
-		public platform: Platform,
-		private dbProvider: DbProvider) {
+		public platform: Platform) {
 		this.menuCtrl.enable(false);
 	}
 

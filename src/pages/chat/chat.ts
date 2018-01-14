@@ -1,12 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, PopoverController, Events } from 'ionic-angular';
+import { NavController, NavParams, PopoverController, Events, LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
 // import $ from 'jquery';
 import 'expose-loader?jQuery!jquery';
 import 'signalr';
 import { Http } from '@angular/http';
-import { LoadingController } from 'ionic-angular';
 import { DbProvider } from '../../providers/db/db';
 import { ChatSettingsComponent } from '../../components/chat-settings/chat-settings';
 
