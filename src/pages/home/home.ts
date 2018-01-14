@@ -31,7 +31,6 @@ export class HomePage {
 		});
 
 		loading.present();
-		/* let headers = new Headers();  */
 		var headers: any = new Headers();
 		headers.append('Content-Type', 'application/json');
 		let data = JSON.stringify({ action: 'login_action', username: this.username, password: this.password });
@@ -62,40 +61,39 @@ export class HomePage {
 	}
 	getOneSignalPlayerId() {        // get Onesignal playerid and add/update it to users node.
 		window["plugins"].OneSignal.getPermissionSubscriptionState(function(status) {
-			this.PlayerId = status.subscriptionStatus.userId;
-		});
-		var headers: any = new Headers();
-		headers.append('Content-Type', 'application/json');
-		this.http.get('https://chat.emailcipher.com:8081/api/device/info?userId=' + this.storage.get('user_id'), headers)
-		.map(res => res.json())
-		.subscribe(res => {
-			console.log(res);
-
-			if (!res.PlayerId) {
-				let data = JSON.stringify(
-					{
-						"UserId": this.storage.get('user_id'),
-						"PlayerId": this.PlayerId
-					}
-				);
-				this.http.post('https://chat.emailcipher.com:8081/api/device/register', data, headers)
-					.map(res => res.json())
-					.subscribe(res => {
-						if (res.Success == 'true') {
-							console.log("PlayerID registered");
-						}
-						else {
+			status.permissionStatus.hasPrompted;
+			status.permissionStatus.status;
+			
+			status.subscriptionStatus.subscribed;
+			status.subscriptionStatus.userSubscriptionSetting;
+			status.subscriptionStatus.pushToken;
+			
+			var playerId = status.subscriptionStatus.userId;
+			var apiUrl = "https://chat.emailcipher.com:8081/api/device/";
+			var headers: any = new Headers();
+			headers.append('Content-Type', 'application/json');
+			this.http.get(apiUrl + 'info?userId=' + this.storage.get('user_id'), headers)
+			.map(res => res.json())
+			.subscribe(res => {
+				console.log(res);
+				if (!res.PlayerId) {
+					let data = JSON.stringify({userId: this.storage.get('user_id'),playerId: playerId});
+					this.http.post(apiUrl + 'register', data, headers)
+						.map(res => res.json())
+						.subscribe(res => {
+							if (res.Success == 'true') {
+								console.log("PlayerID registered");
+							}
+							else {
+								console.log("Error");
+							}
+						}, (err) => {
 							console.log("Error");
-						}
-
-					}, (err) => {
-						console.log("Error");
-
-					});
-			}
-		}, (err) => {
-			console.log("Error");
-
+						});
+				}
+			}, (err) => {
+				console.log("Error");
+			});
 		});
 	}
 }

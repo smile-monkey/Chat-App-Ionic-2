@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 // import $ from 'jquery';
 import 'expose-loader?jQuery!jquery';
 import 'signalr';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { DbProvider } from '../../providers/db/db';
 import { ChatSettingsComponent } from '../../components/chat-settings/chat-settings';
 
@@ -202,31 +202,17 @@ export class ChatPage {
     });
   }
   createPushNotification(msg) {
-    var headers: any = new Headers();
-    headers.append('Content-Type', 'application/json');
-
-    let data = JSON.stringify(
-      {
-        "app_id": "426e2e39-5ea9-4387-996a-d5e567f83699",
-        "included_segments": this.item.PlayerId,
-        "data": { "Push Notification": msg },
-        "contents": { "en": "English Message" }
-      }
-    );
-    headers.append('Authorization', 'OGMwMzI1NWItZDI2Ni00YzQ0LWFjZTMtNTQxMGViYjFjZGRm');
-    this.http.post('https://onesignal.com/api/v1/notifications', data, headers)
-      .map(res => res.json())
-      .subscribe(res => {
-        if (res.status == 'true') {
-          console.log("Sent Notfication");
-        }
-        else {
-          console.log("Send Notfication Error");
-        }
-
-      }, (err) => {
-        console.log("Error");
-      });
+      var headers = new Headers();
+      headers.append('Content-Type', "application/json; charset=utf-8");
+      headers.append('Authorization', "Basic ODQ5OGFhNjAtNTEzOS00YTVlLWJhYmQtYTRmODFmNGI5ZjQ3");
+      var url = "https://onesignal.com/api/v1/notifications";
+      var data = { 
+        app_id: "c9c77500-ce99-4ffb-9c1a-d3fa25dcddaa",
+        contents: {"en": msg},
+        include_player_ids: [this.item.PlayerId]
+      };
+      return this.http.post(url, data, {headers: headers}).map(response=>
+              response.json());      
   }
 
   ionViewWillLeave() {

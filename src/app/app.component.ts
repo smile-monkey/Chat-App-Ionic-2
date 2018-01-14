@@ -54,19 +54,37 @@ export class MyApp {
       this.splashScreen.hide();
 
       // OneSignal Code start:
-      // Enable to debug issues:
-      // window["plugins"].OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
-
-      var notificationOpenedCallback = function (jsonData) {
-        console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
-      };
-
-      window["plugins"].OneSignal
-        .startInit("426e2e39-5ea9-4387-996a-d5e567f83699", "243600679786")
-        .handleNotificationOpened(notificationOpenedCallback)
-        .endInit();
+      this.setupOneSignal();
       this.initializeApp();
     });
+  }
+
+  setupOneSignal() {
+    var tt = this;
+    
+    if(this.platform.is('ios') || this.platform.is('android')) {}
+    else {
+      return;
+    }
+    var iosSettings = {};
+    iosSettings["kOSSettingsKeyAutoPrompt"] = false; // will not prompt users when start app 1st time
+    iosSettings["kOSSettingsKeyInAppLaunchURL"] = false; // false opens safari with Launch URL
+
+    var notificationOpenedCallback = function(jsonData) {
+      //alert('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+      // if(jsonData.notification.isAppInFocus) { };
+    };
+    var notificationReceivedCallback = function(jsonData) {
+      //alert('notificationReceivedCallback: ' + JSON.stringify(jsonData));
+      // if(jsonData.isAppInFocus) { };
+    }
+    window["plugins"].OneSignal
+      .startInit("c9c77500-ce99-4ffb-9c1a-d3fa25dcddaa", "243600679786")
+      .iOSSettings(iosSettings) // only needed if added Optional OneSignal code for iOS above
+      .inFocusDisplaying(0)
+      .handleNotificationOpened(notificationOpenedCallback)
+      .handleNotificationReceived(notificationReceivedCallback)
+      .endInit();    
   }
 
   initializeApp() {
