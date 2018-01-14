@@ -60,7 +60,6 @@ export class MyApp {
   }
 
   setupOneSignal() {
-    var tt = this;
     
     if(this.platform.is('ios') || this.platform.is('android')) {}
     else {

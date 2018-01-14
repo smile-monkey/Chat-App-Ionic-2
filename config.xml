@@ -92,5 +92,5 @@
         <variable name="MAX_STORE" value="2" />
     </plugin>
     <plugin name="onesignal-cordova-plugin" spec="^2.2.5" />
-    <engine name="ios" spec="4.5.4" />
+    <engine name="ios" spec="~4.5.4" />
 </widget>
